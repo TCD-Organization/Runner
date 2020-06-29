@@ -1,0 +1,22 @@
+{
+  "id":"5eea3073c600a221985c1ad2",
+  "genre":"test",
+  "content":"Si vous êtes en mesure de lire ce qui suit, il vous \r\nest possible de récupérer les fichiers dans un format \r\nvous permettant l’impression des articles de la rubrique \r\nde la Cordelière\r\n- TEST -\r\nLecture fichier PDF\r\n",
+"analysis":{
+  "id":"5eea3073c600a221985c1ad2",
+  "name":"Test analysis n2",
+  "type":"SEMANTIC_ANALYSIS",
+  "status":"TO_START",
+  "document_id":"5ee90e593f7c6e46ad2130e9",
+  "document_name":"linkDocument",
+  "owner":"hello",
+  "runner":null,
+  "step_number":0,
+  "total_steps":0,
+  "step_name":null,
+  "start_time":null,
+  "lasting_time":null,
+  "end_time":null,
+  "result":null
+  }
+}

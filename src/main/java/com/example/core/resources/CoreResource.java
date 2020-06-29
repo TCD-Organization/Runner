@@ -4,16 +4,11 @@ import com.example.core.DTO.dataDTO;
 import com.example.core.models.Analysis;
 import com.example.core.models.Data;
 import com.example.core.models.Token;
-import com.example.core.services.LanguageService;
-import com.example.core.services.ParserService;
-import com.example.core.services.SemanticService;
+import com.example.core.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +20,47 @@ public class CoreResource {
     private final ParserService ps;
     @Autowired
     LanguageService ls;
+    @Autowired
+    SemanticService ss;
+    @Autowired
+    SentimentService ss2;
+    @Autowired
+    HealthService hs;
+    @Autowired
+    SourceService ss3;
 
     public CoreResource(ParserService ps) {
         this.ps = ps;
     }
 
-    @PostMapping
-    public ResponseEntity<Data> core(@RequestBody dataDTO data) {
+//    @PostMapping
+//    public ResponseEntity<Data> coreAPI(@RequestBody dataDTO data) {
+//        return new ResponseEntity<>(core(data), HttpStatus.OK);
+//    }
+
+    public void core(dataDTO data){
+        hs.contentLength = data.getContent().length();
         Data _input = new Data(data);
+        hs.updateStatus(_input, 0, 0);
         List<Analysis> results = new ArrayList<>();
+        hs.updateStatus(_input, 1, 1);
         results.add(ls.languageDetector(_input.getContent()));
         if (results.get(0).getResult().substring(0, 2).equals("fr")) {
             List<Token> tokens = ps.Parser(_input.getContent());
-            //_input.setResult(results);
+            hs.updateStatus(_input, 1, 1);
+            results.add(ss.AnalyseNames(tokens));
+            hs.updateStatus(_input, 2, 1);
+            results.add(ss.DomainFinder(tokens));
+            hs.updateStatus(_input, 3, 1);
+            results.add(ss.SubjectFinder(tokens));
+            hs.updateStatus(_input, 4, 1);
+            results.add(ss2.SentimentFinder(tokens));
+            hs.updateStatus(_input, 5, 1);
+            results.add(ss3.findSource(_input.getContent()));
+            hs.updateStatus(_input, 6, 1);
+            _input.setResult(results);
         }
-        return new ResponseEntity<>(_input, HttpStatus.OK);
+        hs.updateStatus(_input, 7, 2);
+        hs.contentLength = 0;
     }
 }
