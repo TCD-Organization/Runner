@@ -26,8 +26,6 @@ public class CoreResource {
     SentimentService ss2;
     @Autowired
     HealthService hs;
-    @Autowired
-    SourceService ss3;
 
     public CoreResource(ParserService ps) {
         this.ps = ps;
@@ -56,11 +54,11 @@ public class CoreResource {
             hs.updateStatus(_input, 4, 1);
             results.add(ss2.SentimentFinder(tokens));
             hs.updateStatus(_input, 5, 1);
-            results.add(ss3.findSource(_input.getContent()));
-            hs.updateStatus(_input, 6, 1);
             _input.setResult(results);
+            hs.updateStatus(_input, 6, 2);
+        }else{
+            hs.updateStatus(_input, 6, 3);
         }
-        hs.updateStatus(_input, 7, 2);
         hs.contentLength = 0;
     }
 }

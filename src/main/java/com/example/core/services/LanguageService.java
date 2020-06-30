@@ -15,7 +15,11 @@ public class LanguageService {
     public String detectLang(String text) {
         LanguageDetector languageDetector = new OptimaizeLangDetector().loadModels();
         LanguageResult result = languageDetector.detect(text);
-        return result.getLanguage()+"["+result.getRawScore()+"]";
+        if(result.isUnknown()){
+            return "Not acceptable";
+        }else{
+            return result.getLanguage()+"["+result.getRawScore()+"]";
+        }
     }
 
     public Analysis languageDetector(String text){

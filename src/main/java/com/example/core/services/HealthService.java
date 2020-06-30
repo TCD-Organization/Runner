@@ -45,6 +45,7 @@ public class HealthService {
             }
             if(status == 0) params.put("status", "TO_START");
             if(status == 1) params.put("status", "IN_PROGRESS");
+            if(status == 3) params.put("status", "FINISHED");
             if(status == 2){
                 params.put("status", "FINISHED");
                 params.put("result", data.getResult().toString());

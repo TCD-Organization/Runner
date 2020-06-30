@@ -25,10 +25,6 @@
   },
   {
     "a_id": 6,
-    "name": "FINDING_POTENTIAL_SOURCE"
-  },
-  {
-    "a_id": 7,
     "name": "RETURNING_ANALYSIS"
   }
 ]
