@@ -79,7 +79,7 @@ public class Initializer {
     public void booting(){
         Timestamp start = Tools.instantTimestamp();
         dataDTO dataTest = new dataDTO();
-        dataTest.set_id("TEST_RUN");
+        dataTest.setAnalysis_id("TEST_RUN");
         String content = "Il était une fois, Hervé Patrak, Christine et leurs enfants Sophie et Jean. Ils vivèrent heureux dans un chalet avec des voisins fort sympathiques. Ils étaient heureux, la vie était paisible.";
         dataTest.setContent(content);
         this.bootingLength = content.length();
