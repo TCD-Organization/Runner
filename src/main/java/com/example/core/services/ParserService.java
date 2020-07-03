@@ -62,7 +62,9 @@ public class ParserService {
             }
             tokens.get(i).setContent(tokens.get(i).getContent().replace(",",""));
             tokens.get(i).setContent(tokens.get(i).getContent().replace(".",""));
-
+            tokens.get(i).setContent(tokens.get(i).getContent().replace(";",""));
+            tokens.get(i).setContent(tokens.get(i).getContent().replace("?",""));
+            tokens.get(i).setContent(tokens.get(i).getContent().replace("!",""));
             if(tokens.get(i).getContent().length() <= 3) toRemove.add(tokens.get(i));
         }
         for(int i = 0; i < toRemove.size(); i++){

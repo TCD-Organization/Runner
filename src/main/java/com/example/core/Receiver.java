@@ -3,25 +3,20 @@ package com.example.core;
 import java.util.concurrent.CountDownLatch;
 
 import com.example.core.DTO.dataDTO;
-import com.example.core.models.Data;
-import com.example.core.resources.CoreResource;
+import com.example.core.services.CoreService;
 import com.example.core.services.Tools;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
-import org.springframework.boot.context.properties.bind.DataObjectPropertyName;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Receiver {
 
     @Autowired
-    CoreResource cr;
+    CoreService cs;
 
     private CountDownLatch latch = new CountDownLatch(1);
 
@@ -35,7 +30,7 @@ public class Receiver {
             dataDTO dataOBJ = new dataDTO();
             dataOBJ.setContent(input.get("content").toString());
             dataOBJ.set_id(analysis.get("id").toString());
-            cr.core(dataOBJ);
+            cs.core(dataOBJ);
         }catch(ParseException e){
             e.printStackTrace();
             System.exit(0);

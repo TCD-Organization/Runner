@@ -1,4 +1,4 @@
-package com.example.core.resources;
+package com.example.core.services;
 
 import com.example.core.DTO.dataDTO;
 import com.example.core.models.Analysis;
@@ -8,14 +8,14 @@ import com.example.core.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping("/core")
-public class CoreResource {
+@Service
+public class CoreService {
 
     private final ParserService ps;
     @Autowired
@@ -27,14 +27,9 @@ public class CoreResource {
     @Autowired
     HealthService hs;
 
-    public CoreResource(ParserService ps) {
+    public CoreService(ParserService ps) {
         this.ps = ps;
     }
-
-//    @PostMapping
-//    public ResponseEntity<Data> coreAPI(@RequestBody dataDTO data) {
-//        return new ResponseEntity<>(core(data), HttpStatus.OK);
-//    }
 
     public void core(dataDTO data){
         hs.contentLength = data.getContent().length();
@@ -58,6 +53,22 @@ public class CoreResource {
             hs.updateStatus(_input, 6, 2);
         }else{
             hs.updateStatus(_input, 6, 3);
+        }
+        hs.contentLength = 0;
+    }
+
+    public void silentCore(dataDTO data){
+        hs.contentLength = data.getContent().length();
+        Data _input = new Data(data);
+        List<Analysis> results = new ArrayList<>();
+        results.add(ls.languageDetector(_input.getContent()));
+        if (results.get(0).getResult().substring(0, 2).equals("fr")) {
+            List<Token> tokens = ps.Parser(_input.getContent());
+            results.add(ss.AnalyseNames(tokens));
+            results.add(ss.DomainFinder(tokens));
+            results.add(ss.SubjectFinder(tokens));
+            results.add(ss2.SentimentFinder(tokens));
+            _input.setResult(results);
         }
         hs.contentLength = 0;
     }
