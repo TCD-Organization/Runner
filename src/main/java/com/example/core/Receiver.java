@@ -33,7 +33,7 @@ public class Receiver {
             JSONObject input = (JSONObject) parser.parse(message);
             dataDTO dataOBJ = new dataDTO();
             dataOBJ.setContent(input.get("content").toString());
-            dataOBJ.setAnalysis_id(input.get("id").toString());
+            dataOBJ.setAnalysis_id(input.get("analysis_id").toString());
             cr.core(dataOBJ);
         }catch(ParseException e){
             e.printStackTrace();
