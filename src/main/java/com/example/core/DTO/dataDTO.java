@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class dataDTO {
-    private String _id;
+    private String analysis_id;
     private String content;
 }
