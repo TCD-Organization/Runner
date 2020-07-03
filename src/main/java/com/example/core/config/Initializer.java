@@ -72,7 +72,7 @@ public class Initializer {
         params.put("runnername", this.runnerName);
         params.put("key", "test123");
         HttpEntity<String> request = new HttpEntity<String>(params.toString(), headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(this.registerURL+"/runner/connect", request, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(this.registerURL+"/login/runner", request, String.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
             Tools.log(1, "Registering request Successful");
@@ -88,7 +88,7 @@ public class Initializer {
     public void booting(){
         Timestamp start = Tools.instantTimestamp();
         dataDTO dataTest = new dataDTO();
-        dataTest.set_id("BOOTING");
+        dataTest.setAnalysis_id("BOOTING");
         String content = "Il était une fois, Hervé Patrak, Christine et leurs enfants Sophie et Jean. Ils vivèrent heureux dans un chalet avec des voisins fort sympathiques. Ils étaient heureux, la vie était paisible.";
         dataTest.setContent(content);
         this.bootingLength = content.length();

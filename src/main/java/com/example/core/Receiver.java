@@ -31,10 +31,9 @@ public class Receiver {
             Tools.log(1, "Receiving a new message");
             JSONParser parser = new JSONParser();
             JSONObject input = (JSONObject) parser.parse(message);
-            JSONObject analysis = (JSONObject) input.get("analysis");
             dataDTO dataOBJ = new dataDTO();
             dataOBJ.setContent(input.get("content").toString());
-            dataOBJ.set_id(analysis.get("id").toString());
+            dataOBJ.setAnalysis_id(input.get("id").toString());
             cr.core(dataOBJ);
         }catch(ParseException e){
             e.printStackTrace();
