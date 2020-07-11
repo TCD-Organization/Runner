@@ -1,20 +1,16 @@
 package com.example.core;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-
 import com.example.core.DTO.dataDTO;
 import com.example.core.services.CoreService;
 import com.example.core.services.Tools;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.support.ListenerExecutionFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.concurrent.CountDownLatch;
 
 @Component
 public class Receiver {

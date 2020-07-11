@@ -4,13 +4,9 @@ import com.example.core.DTO.dataDTO;
 import com.example.core.models.Analysis;
 import com.example.core.models.Data;
 import com.example.core.models.Token;
-import com.example.core.services.*;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
