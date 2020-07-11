@@ -7,10 +7,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileNotFoundException;
@@ -30,7 +32,7 @@ public class HealthService {
     @Autowired
     Initializer initializer;
 
-    public void updateStatus(Data data, Integer a_id, Integer status){
+    public void updateStatus(Data data, Integer a_id, Integer status) throws HttpClientErrorException {
         if(!initializer.isTesting){
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
@@ -54,7 +56,7 @@ public class HealthService {
             }
             Tools.log(1, params.toString());
             HttpEntity<String> request = new HttpEntity<String>(params.toString(), headers);
-            restTemplate.put(this.serverURL+"/analysis/"+data.getAnalysis_id()+"/progress",  request);
+            restTemplate.put(this.serverURL + "/analysis/" + data.getAnalysis_id() + "/progress", request);
         }
     }
 
@@ -77,5 +79,13 @@ public class HealthService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void cancelAnalysis(Data data) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", initializer.bearerToken);
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+        restTemplate.put(this.serverURL + "/analysis/" + data.getAnalysis_id() + "/cancel", request);
     }
 }
