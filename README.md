@@ -4,7 +4,7 @@
 
 * Language Detection (18 languages available)
 * Parsing
-* [WIP] Semantic Analysis 
+* Semantic Analysis 
 
 ## Technologies used
 
