@@ -147,11 +147,11 @@ public class SentimentService {
         String result = "";
         for (String key: orderedPolarity.keySet()) {
             double d = (double)orderedPolarity.get(key)/sumPolarity;
-            result += key + "["+(Math.round(d * 100.0) / 100.0)+"];";
+            result += key + "["+(Math.round(d * 100.0))+"%];";
         }
         for (String key: orderedGlobal.keySet()) {
             double d = (double)orderedGlobal.get(key)/sumGlobal;
-            result += key + "["+(Math.round(d * 100.0) / 100.0)+"];";
+            result += key + "["+(Math.round(d * 100.0))+"%];";
         }
         analysis.setResult(result);
         analysis.setEnd(Tools.instantTimestamp());

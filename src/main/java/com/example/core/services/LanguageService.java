@@ -1,7 +1,5 @@
 package com.example.core.services;
 
-import java.io.IOException;
-
 import com.example.core.models.Analysis;
 import org.apache.tika.langdetect.OptimaizeLangDetector;
 import org.apache.tika.language.detect.LanguageDetector;
@@ -18,7 +16,7 @@ public class LanguageService {
         if(result.isUnknown()){
             return "Not acceptable";
         }else{
-            return result.getLanguage()+"["+result.getRawScore()+"]";
+            return result.getLanguage()+"["+result.getRawScore()*100+"%]";
         }
     }
 

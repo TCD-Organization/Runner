@@ -137,7 +137,7 @@ public class SemanticService {
         String result = "";
         for (String key: ordered.keySet()) {
             double d = (double)ordered.get(key)/sum;
-            result += key + "["+(Math.round(d * 100.0) / 100.0)+"];";
+            result += key + "["+(Math.round(d * 100.0))+"%];";
         }
         analysis.setResult(result);
         analysis.setEnd(Tools.instantTimestamp());
@@ -174,7 +174,7 @@ public class SemanticService {
         String result = "";
         for (String key: ordered.keySet()) {
             double d = (double)ordered.get(key)/sum;
-            result += key + "["+(Math.round(d * 100.0) / 100.0)+"];";
+            result += key + "["+(Math.round(d * 100.0))+"%];";
         }
         analysis.setResult(result);
         analysis.setEnd(Tools.instantTimestamp());

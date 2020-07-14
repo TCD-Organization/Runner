@@ -54,7 +54,7 @@ public class CoreService {
                 hs.updateStatus(_input, 6, 3);
             }
             hs.contentLength = 0;
-        } catch (HttpClientErrorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             hs.cancelAnalysis(_input);
             throw new AmqpRejectAndDontRequeueException(e.getMessage());
