@@ -3,6 +3,7 @@ package com.example.core.services;
 import com.example.core.config.Initializer;
 import com.example.core.models.Analysis;
 import com.example.core.models.Data;
+import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -48,8 +49,8 @@ public class HealthService {
             if(status == 3) params.put("status", "FINISHED");
             if(status == 2){
                 params.put("status", "FINISHED");
-                params.put("result", data.getResult().toString());
-            }else{
+                params.put("result", new Gson().toJson(data.getResult()));
+            } else {
                 params.put("result", null);
             }
             Tools.log(1, params.toString());
