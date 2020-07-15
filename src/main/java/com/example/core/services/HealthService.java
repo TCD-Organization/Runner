@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class HealthService {
@@ -65,7 +66,7 @@ public class HealthService {
         try
         {
             //Read JSON file
-            String reader = new String(this.getClass().getResourceAsStream("/mods.json").readAllBytes());
+            String reader = new String(this.getClass().getResourceAsStream("/mods.json").readAllBytes(), StandardCharsets.UTF_8);
             Object obj = jsonParser.parse(reader);
             JSONArray modsList = (JSONArray) obj;
             JSONObject json = (JSONObject) modsList.get(a_id);
