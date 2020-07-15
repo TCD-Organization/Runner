@@ -10,8 +10,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,7 @@ public class SemanticService {
 
     public SemanticService(){
         try{
-            String contents = new String(this.getClass().getResourceAsStream(pathDEM).readAllBytes());
+            String contents = new String(this.getClass().getResourceAsStream(pathDEM).readAllBytes(), StandardCharsets.UTF_8);
             JSONParser parser = new JSONParser();
             this.dem = (JSONArray) parser.parse(contents);
         }catch(IOException | ParseException e){
