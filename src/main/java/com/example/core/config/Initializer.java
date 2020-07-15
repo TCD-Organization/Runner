@@ -111,9 +111,7 @@ public class Initializer {
             }
             Object obj = parser.parse(new FileReader(p.toString()));
             JSONObject object = (JSONObject) obj;
-            String ID = (String) object.get("ID");
-            System.out.println("ID IS :"+ ID);
-            this.ID = ID;
+            this.ID = (String) object.get("ID");
         }catch(Exception e){
             e.printStackTrace();
         }
