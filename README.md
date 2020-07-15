@@ -9,7 +9,7 @@
 ## Technologies used
 
 * Java Spring
-* RabbitMQ (default queue is "queue1")
+* RabbitMQ (default queue is "new_runner_analyses")
 * Lombok
 * Apache Tika
 

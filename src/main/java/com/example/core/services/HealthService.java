@@ -55,16 +55,17 @@ public class HealthService {
             }
             Tools.log(1, params.toString());
             HttpEntity<String> request = new HttpEntity<String>(params.toString(), headers);
+            System.out.println("Params:" + params.toString());
             restTemplate.put(this.serverURL + "/analysis/" + data.getAnalysis_id() + "/progress", request);
         }
     }
 
     private void findName(JSONObject params, Integer a_id){
         JSONParser jsonParser = new JSONParser();
-        String workingDir = System.getProperty("user.dir");
-        try (FileReader reader = new FileReader(workingDir+"/mods.json"))
+        try
         {
             //Read JSON file
+            String reader = new String(this.getClass().getResourceAsStream("/mods.json").readAllBytes());
             Object obj = jsonParser.parse(reader);
             JSONArray modsList = (JSONArray) obj;
             JSONObject json = (JSONObject) modsList.get(a_id);

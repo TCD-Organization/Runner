@@ -3,36 +3,30 @@ package com.example.core.services;
 
 import com.example.core.models.Analysis;
 import com.example.core.models.Token;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.arnx.jsonic.JSON;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.hibernate.validator.internal.util.StringHelper.join;
 
 @Service
 public class SemanticService {
-    private String pathDEM = System.getProperty("user.dir")+"/DEM-1_0.json";
+    private String pathDEM = "/DEM-1_0.json";
     private JSONArray dem;
     private JSONParser parser = new JSONParser();
 
     public SemanticService(){
         try{
-            String contents = new String((Files.readAllBytes(Paths.get(this.pathDEM))));
+            String contents = new String(this.getClass().getResourceAsStream(pathDEM).readAllBytes(), StandardCharsets.UTF_8);
             JSONParser parser = new JSONParser();
             this.dem = (JSONArray) parser.parse(contents);
         }catch(IOException | ParseException e){
