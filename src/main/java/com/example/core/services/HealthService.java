@@ -55,6 +55,7 @@ public class HealthService {
             }
             Tools.log(1, params.toString());
             HttpEntity<String> request = new HttpEntity<String>(params.toString(), headers);
+            System.out.println("Params:" + params.toString());
             restTemplate.put(this.serverURL + "/analysis/" + data.getAnalysis_id() + "/progress", request);
         }
     }
