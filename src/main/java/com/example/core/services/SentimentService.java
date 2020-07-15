@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class SentimentService {
-    private String pathEmotions = System.getProperty("user.dir")+"/emotions.csv";
+    private String pathEmotions = "/emotions.csv";
 
     public SentimentService(){
     }
@@ -30,7 +31,7 @@ public class SentimentService {
         int sumPolarity = 0;
         int sumGlobal = 0;
         for(int i = 0; i < tokens.size(); i++){
-            try (BufferedReader br = new BufferedReader(new FileReader(this.pathEmotions))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(pathEmotions)))){
 
                 while ((line = br.readLine()) != null) {
                     String[] text = line.split(cvsSplitBy);

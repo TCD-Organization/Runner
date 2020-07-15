@@ -1,0 +1,30 @@
+[
+  {
+    "a_id": 0,
+    "name": "INITIALIZING"
+  },
+  {
+    "a_id": 1,
+    "name": "LANGUAGE_DETECTION"
+  },
+  {
+    "a_id": 2,
+    "name": "FINDING_NAMES"
+  },
+  {
+    "a_id": 3,
+    "name": "FINDING_CONTEXT"
+  },
+  {
+    "a_id": 4,
+    "name": "CORRESPONDING_SUBJECT"
+  },
+  {
+    "a_id": 5,
+    "name": "SENTIMENT_ANALYSIS"
+  },
+  {
+    "a_id": 6,
+    "name": "RETURNING_ANALYSIS"
+  }
+]

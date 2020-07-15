@@ -93,8 +93,7 @@ public class Initializer {
     public void verifyRunnerKey(){
         JSONParser parser = new JSONParser();
         try{
-            String workingDir = System.getProperty("user.dir");
-            Path p = Paths.get(workingDir+"/config.json");
+            Path p = Paths.get("./config.json");
             if(!Files.exists(p)){
                 JSONObject obj = new JSONObject();
                 UUID coreID = UUID.randomUUID();
@@ -113,6 +112,7 @@ public class Initializer {
             Object obj = parser.parse(new FileReader(p.toString()));
             JSONObject object = (JSONObject) obj;
             String ID = (String) object.get("ID");
+            System.out.println("ID IS :"+ ID);
             this.ID = ID;
         }catch(Exception e){
             e.printStackTrace();
